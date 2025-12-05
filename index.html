@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Student Portfolio | Mapúa MCM</title>
+    <meta name="description" content="Personal Portfolio for IT103" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    
+    <!-- Background Glow Effect -->
+    <div class="bg-glow"></div>
+
+    <div class="wrap">
+        <header>
+            <div class="brand">
+                <div class="logo">MJ</div>
+                <div>
+                    <!-- LAB REQUIREMENT: Name -->
+                    <div class="name">Matthew Danielle Jariol</div>
+                    <!-- LAB REQUIREMENT: Course and Year -->
+                    <div class="muted role">BS Information Systems | 2nd Year</div>
+                </div>
+            </div>
+
+            <nav id="nav">
+                <a class="nav-link" href="#hero">Home</a>
+                <a class="nav-link" href="#achievements">Achievements</a>
+                <a class="nav-link" href="#projects">Projects</a>
+                <!-- LAB REQUIREMENT: Switch Theme Button -->
+                <button id="theme-toggle" class="nav-link btn secondary">Switch Theme</button>
+            </nav>
+
+            <button class="menu-btn" id="menuBtn" aria-expanded="false">☰</button>
+        </header>
+
+        <main>
+            <!-- HERO SECTION (Bento Grid Style) -->
+            <section id="hero" class="hero-grid">
+                
+                <!-- 1. Text Area -->
+                <div class="box intro-box">
+                    <div class="status-pill">
+                        <span class="dot"></span> IT103 Student
+                    </div>
+                    <h1>Designing the future,<br>one pixel at a time.</h1>
+                    <p class="muted">Welcome to my personal portfolio. I am a student at Mapúa Malayan Colleges Mindanao demonstrating my skills in HTML, CSS, and JavaScript.</p>
+                    
+                    <div class="cta-group">
+                        <a class="btn primary" href="#projects">View Projects</a>
+                        <a class="btn secondary" href="#achievements">My Achievements</a>
+                    </div>
+                </div>
+
+                <!-- 2. Profile Image Area -->
+                <div class="box image-box">
+                    <!-- LAB REQUIREMENT: Profile Image -->
+                    <img src="ID PICTURE.jpg" alt="Profile Picture" class="profile-img" id="profile-pic">
+                    <div class="image-overlay"></div>
+                </div>
+
+                <!-- 3. Tech Stack / Skills -->
+                <div class="box tech-box">
+                    <h3>Technologies</h3>
+                    <div class="skills">
+                        <span class="chip">HTML5</span>
+                        <span class="chip">CSS3</span>
+                        <span class="chip">JavaScript</span>
+                        <span class="chip">Git</span>
+                        <span class="chip">GitHub</span>
+                    </div>
+                </div>
+
+                <!-- 4. LAB REQUIREMENT: Achievements / Certifications -->
+                <div id="achievements" class="box stats-box">
+                    <h3>Achievements</h3>
+                    <ul class="achievement-list">
+                        <li>Dean's Lister (2023)</li>
+                        <li>Certified Python Associate</li>
+                        <li>Hackathon Runner-up</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- PROJECTS SECTION -->
+            <section id="projects">
+                <div class="section-title">
+                    <h2>Previous Projects</h2>
+                    <div class="filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="web">Web</button>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <!-- Project 1 -->
+                    <a href="#" class="project box" data-type="web">
+                        <div class="project-header">
+                            <span class="badge">IT103</span>
+                            <div class="arrow">↗</div>
+                        </div>
+                        <div class="project-content">
+                            <h3>StrokeSense Landing Page</h3>
+                            <p>A responsive landing page for an AI-powered Baybayin learning game created for Module 1.</p>
+                        </div>
+                    </a>
+
+                    <!-- Project 2 -->
+                    <div class="project box" data-type="web">
+                        <div class="project-header">
+                            <span class="badge">Practice</span>
+                            <div class="arrow">↗</div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Personal Portfolio</h3>
+                            <p>This website! Built using HTML structure, CSS Flexbox/Grid, and JavaScript DOM manipulation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project box" data-type="design">
+                        <div class="project-header">
+                            <span class="badge">Concept</span>
+                            <div class="arrow">↗</div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Calculator App</h3>
+                            <p>A simple calculator logic built with JavaScript functions.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; <span id="year"></span> Created by Your Name for IT103.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
