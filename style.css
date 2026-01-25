@@ -283,19 +283,33 @@ nav {
 }
 
 .project-media {
+    position: relative;
     height: 140px;
     border-radius: 12px;
-    background: linear-gradient(
-        135deg,
-        rgba(16,185,129,0.3),
-        rgba(255,255,255,0.02)
-    );
-    padding: 12px;
+    overflow: hidden;
     display: flex;
     justify-content: flex-end;
+    align-items: flex-start;
+    background: linear-gradient(135deg, rgba(16,185,129,0.3), rgba(255,255,255,0.02));
+}
+
+.project-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    filter: grayscale(30%);
+}
+
+.project-media:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
 }
 
 .project-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
     background: var(--fg);
     color: var(--bg);
     font-size: 0.7rem;
@@ -303,6 +317,7 @@ nav {
     border-radius: 20px;
     font-weight: 600;
 }
+
 
 .project-card:hover {
     transform: translateY(-8px) scale(1.02);
@@ -372,3 +387,4 @@ footer {
         display: flex;
     }
 }
+
