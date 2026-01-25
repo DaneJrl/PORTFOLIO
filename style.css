@@ -282,6 +282,7 @@ nav {
     color: inherit;
 }
 
+/* Fixed project media styling */
 .project-media {
     position: relative;
     height: 140px;
@@ -317,7 +318,6 @@ nav {
     border-radius: 20px;
     font-weight: 600;
 }
-
 
 .project-card:hover {
     transform: translateY(-8px) scale(1.02);
@@ -387,4 +387,3 @@ footer {
         display: flex;
     }
 }
-
