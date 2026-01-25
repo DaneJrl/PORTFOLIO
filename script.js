@@ -1,52 +1,98 @@
-// Helper functions
-const $ = (q, ctx=document) => ctx.querySelector(q);
-const $$ = (q, ctx=document) => [...ctx.querySelectorAll(q)];
+/* ===================== */
+/* Helper Functions */
+const $ = (q, ctx = document) => ctx.querySelector(q);
+const $$ = (q, ctx = document) => [...ctx.querySelectorAll(q)];
 
-// --- LAB TASK 4: Theme Toggle Functionality ---
-const toggleButton = document.getElementById('theme-toggle');
+/* ===================== */
+/* Theme Toggle (Dark / Light Mode) */
+const themeToggle = $('#theme-toggle');
 const body = document.body;
 
-toggleButton.addEventListener('click', () => {
-    // 1. Toggle the CSS class
+themeToggle.addEventListener('click', () => {
     body.classList.toggle('light-mode');
-    
-    // 2. (Optional) Check current state for console debugging
-    if (body.classList.contains('light-mode')) {
-        console.log("Switched to Light Mode");
-    } else {
-        console.log("Switched to Dark Mode");
-    }
+
+    // Optional: Visual feedback in console (safe for lab)
+    console.log(
+        body.classList.contains('light-mode')
+            ? 'Light mode enabled'
+            : 'Dark mode enabled'
+    );
 });
 
-// --- Mobile Menu ---
+/* ===================== */
+/* Mobile Navigation Toggle */
 const menuBtn = $('#menuBtn');
 const nav = $('#nav');
 
 menuBtn.addEventListener('click', () => {
-    const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
-    menuBtn.setAttribute('aria-expanded', !expanded);
-    nav.classList.toggle('open');
+    const isOpen = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
 });
 
-// --- Footer Year ---
+/* Close menu when a link is clicked (UX improvement) */
+$$('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        nav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', false);
+    });
+});
+
+/* ===================== */
+/* Footer Year */
 $('#year').textContent = new Date().getFullYear();
 
-// --- Project Filter Logic ---
-const filters = $$('.filter-btn');
+/* ===================== */
+/* Project Filter Logic */
+const filterButtons = $$('.filter-btn');
 const projects = $$('.project');
 
-filters.forEach(btn => {
+filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-        filters.forEach(b => b.classList.remove('active'));
+        // Update active state
+        filterButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const filterValue = btn.dataset.filter;
-        
+
+        const filter = btn.dataset.filter;
+
         projects.forEach(project => {
-            if (filterValue === 'all' || project.dataset.type === filterValue) {
+            const type = project.dataset.type;
+
+            if (filter === 'all' || filter === type) {
                 project.style.display = 'flex';
             } else {
                 project.style.display = 'none';
             }
         });
     });
+});
+
+/* ===================== */
+/* Scroll Reveal Animation */
+const revealObserver = new IntersectionObserver(
+    entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    },
+    {
+        threshold: 0.15
+    }
+);
+
+/* Observe all cards and sections */
+$$('.box, .project').forEach(el => {
+    el.classList.add('hidden');
+    revealObserver.observe(el);
+});
+
+/* ===================== */
+/* Optional Enhancement: Keyboard Accessibility */
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        nav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', false);
+    }
 });
