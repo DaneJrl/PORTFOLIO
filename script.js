@@ -1,98 +1,79 @@
-/* ===================== */
-/* Helper Functions */
-const $ = (q, ctx = document) => ctx.querySelector(q);
-const $$ = (q, ctx = document) => [...ctx.querySelectorAll(q)];
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const loveNote = document.getElementById("loveNote");
+const buttonsDiv = document.querySelector(".buttons");
+const noText = document.getElementById("noText");
+const music = document.getElementById("bgMusic");
 
-/* ===================== */
-/* Theme Toggle (Dark / Light Mode) */
-const themeToggle = $('#theme-toggle');
-const body = document.body;
+let size = 20;
 
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('light-mode');
+/* YES BUTTON */
+yesBtn.onclick = function () {
+    buttonsDiv.classList.add("hidden");
+    noText.classList.add("hidden");
+    loveNote.classList.remove("hidden");
+    music.play();
+    startConfetti();
+};
 
-    // Optional: Visual feedback in console (safe for lab)
-    console.log(
-        body.classList.contains('light-mode')
-            ? 'Light mode enabled'
-            : 'Dark mode enabled'
-    );
-});
+/* NO BUTTON */
+noBtn.onclick = function () {
+    size += 8;
+    yesBtn.style.fontSize = size + "px";
+    yesBtn.style.padding = (size * 0.8) + "px " + (size * 1.5) + "px";
 
-/* ===================== */
-/* Mobile Navigation Toggle */
-const menuBtn = $('#menuBtn');
-const nav = $('#nav');
+    noText.classList.remove("hidden");
+    noText.innerText = "Please? 🥺💔";
 
-menuBtn.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('open');
-    menuBtn.setAttribute('aria-expanded', isOpen);
-});
+    moveNoButton();
+};
 
-/* Close menu when a link is clicked (UX improvement) */
-$$('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        nav.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', false);
-    });
-});
+/* MAKE NO BUTTON RUN */
+function moveNoButton() {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
 
-/* ===================== */
-/* Footer Year */
-$('#year').textContent = new Date().getFullYear();
+/* CONFETTI EFFECT */
+function startConfetti() {
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-/* ===================== */
-/* Project Filter Logic */
-const filterButtons = $$('.filter-btn');
-const projects = $$('.project');
+    let pieces = [];
 
-filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        // Update active state
-        filterButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    for (let i = 0; i < 150; i++) {
+        pieces.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 6 + 4,
+            dx: Math.random() - 0.5,
+            dy: Math.random() + 2
+        });
+    }
 
-        const filter = btn.dataset.filter;
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "white";
 
-        projects.forEach(project => {
-            const type = project.dataset.type;
+        pieces.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fill();
 
-            if (filter === 'all' || filter === type) {
-                project.style.display = 'flex';
-            } else {
-                project.style.display = 'none';
+            p.x += p.dx;
+            p.y += p.dy;
+
+            if (p.y > canvas.height) {
+                p.y = 0;
             }
         });
-    });
-});
 
-/* ===================== */
-/* Scroll Reveal Animation */
-const revealObserver = new IntersectionObserver(
-    entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
-                revealObserver.unobserve(entry.target);
-            }
-        });
-    },
-    {
-        threshold: 0.15
+        requestAnimationFrame(draw);
     }
-);
 
-/* Observe all cards and sections */
-$$('.box, .project').forEach(el => {
-    el.classList.add('hidden');
-    revealObserver.observe(el);
-});
-
-/* ===================== */
-/* Optional Enhancement: Keyboard Accessibility */
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-        nav.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', false);
-    }
-});
+    draw();
+}
