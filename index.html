@@ -1,61 +1,39 @@
-<div class="grid">
-    <!-- Project 1 -->
-    <a href="https://danejrl.github.io/CORE-M1-Summative-Exam---Part-3-/" 
-       target="_blank"
-       class="project box project-card"
-       data-type="web">
-        <div class="project-media">
-            <img src="https://via.placeholder.com/400x140?text=CORE+M1" alt="CORE M1 Project">
-            <span class="project-tag">IT103 • Exam</span>
-        </div>
-        <div class="project-content">
-            <h3>CORE M1 Summative Exam</h3>
-            <p>Final summative output showcasing HTML, CSS layout, and JavaScript logic.</p>
-        </div>
-    </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Be My Valentine ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <!-- Project 2 -->
-    <a href="https://cozy-corner-mdsj.vercel.app/" 
-       target="_blank"
-       class="project box project-card"
-       data-type="web">
-        <div class="project-media">
-            <img src="https://via.placeholder.com/400x140?text=Cozy+Corner" alt="Cozy Corner Project">
-            <span class="project-tag">UI / UX</span>
-        </div>
-        <div class="project-content">
-            <h3>Cozy Corner</h3>
-            <p>A calming, aesthetic web experience focused on layout, spacing, and mood.</p>
-        </div>
-    </a>
+    <audio id="bgMusic" loop>
+        <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+    </audio>
 
-    <!-- Project 3 -->
-    <a href="https://tailwindcss-4.vercel.app/" 
-       target="_blank"
-       class="project box project-card"
-       data-type="web">
-        <div class="project-media">
-            <img src="https://via.placeholder.com/400x140?text=Tailwind+CSS" alt="Tailwind CSS Demo">
-            <span class="project-tag">Tailwind CSS</span>
-        </div>
-        <div class="project-content">
-            <h3>Tailwind CSS Demo</h3>
-            <p>Exploration of utility-first CSS and responsive design techniques.</p>
-        </div>
-    </a>
+    <div class="container">
+        <h1>Will You Be My Valentine? ❤️</h1>
 
-    <!-- Project 4 -->
-    <a href="https://danejrl.github.io/JS-Interactive-Dashboard/" 
-       target="_blank"
-       class="project box project-card"
-       data-type="web">
-        <div class="project-media">
-            <img src="https://via.placeholder.com/400x140?text=JS+Dashboard" alt="JS Dashboard">
-            <span class="project-tag">JavaScript</span>
+        <div class="buttons">
+            <button id="yesBtn">Yes 💖</button>
+            <button id="noBtn">No 😢</button>
         </div>
-        <div class="project-content">
-            <h3>JS Interactive Dashboard</h3>
-            <p>An interactive dashboard using DOM manipulation and client-side logic.</p>
+
+        <p id="noText" class="no-text hidden">Are you sure? 🥺</p>
+
+        <div id="loveNote" class="hidden">
+            <h2>YAY!!! 🥰💖</h2>
+            <p>
+                I love you Ruth Licah.✨  
+                I promise to always appreciate you,  
+                laugh with you, and create beautiful memories together ❤️
+            </p>
         </div>
-    </a>
-</div>
+    </div>
+
+    <canvas id="confetti"></canvas>
+    <div class="hearts"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
